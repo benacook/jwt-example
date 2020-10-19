@@ -1,0 +1,5 @@
+{
+  "secret":{
+    "path": "/home/benacook/.ssh/id_rsa"
+  }
+}
