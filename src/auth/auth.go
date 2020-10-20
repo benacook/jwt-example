@@ -28,12 +28,23 @@ func init() {
 	var err error
 	_, b, _, _ := runtime.Caller(0)
 	basePath := filepath.Dir(b)
-	splitStr := strings.SplitAfter(basePath, "jwt-example")
+	splitStr := strings.SplitAfter(basePath, "src")
 	if len(splitStr) < 1{
 		log.Fatal("failed to get bas path")
 	}
-	basePath = splitStr[0]
-	configPath := splitStr[0] + "/config.json"
+
+	last := 0
+	for i:=0 ; i < len(splitStr); i++ {
+		if strings.Contains(splitStr[i], "src"){
+			last = i
+		}
+	}
+
+	basePath = ""
+	for i:=0 ; i <= last; i++ {
+		basePath += splitStr[i]
+	}
+	configPath := basePath + "/config.json"
 	path, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
