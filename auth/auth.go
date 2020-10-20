@@ -28,14 +28,14 @@ func init() {
 	var err error
 	_, b, _, _ := runtime.Caller(0)
 	basePath := filepath.Dir(b)
-	splitStr := strings.SplitAfter(basePath, "src")
+	splitStr := strings.SplitAfter(basePath, "jwt-example")
 	if len(splitStr) < 1{
 		log.Fatal("failed to get bas path")
 	}
 
 	last := 0
 	for i:=0 ; i < len(splitStr); i++ {
-		if strings.Contains(splitStr[i], "src"){
+		if strings.Contains(splitStr[i], "jwt-example"){
 			last = i
 		}
 	}
