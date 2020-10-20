@@ -1,5 +1,5 @@
 {
   "secret":{
-    "path": "/home/benacook/go/src/github.com/benacook/jwt-example/test/test-key"
+    "path": "./test/test-key"
   }
 }
