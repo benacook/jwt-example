@@ -24,8 +24,7 @@ var (
 
 func init() {
 	var err error
-	path, err := ioutil.ReadFile("/home/benacook/go/src/github." +
-		"com/benacook/jwt-example/config.json")
+	path, err := ioutil.ReadFile("./config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
