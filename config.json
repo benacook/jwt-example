@@ -1,5 +1,5 @@
 {
   "secret":{
-    "path": "/home/benacook/.ssh/id_rsa"
+    "path": "/home/benacook/go/src/github.com/benacook/jwt-example/test/test-key"
   }
 }

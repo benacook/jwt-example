@@ -24,7 +24,8 @@ var (
 
 func init() {
 	var err error
-	path, err := ioutil.ReadFile("./config.json")
+	path, err := ioutil.ReadFile("/home/benacook/go/src/github." +
+		"com/benacook/jwt-example/config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -33,7 +34,6 @@ func init() {
 	_ = json.Unmarshal(path, &config)
 
 	secret, err = ioutil.ReadFile(config.Secret.Path)
-	secret, err = ioutil.ReadFile("/home/benacook/.ssh/id_rsa")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -75,6 +75,11 @@ func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		reqToken := r.Header.Get("Authorization")
 		splitToken := strings.Split(reqToken, "Bearer ")
+		if len(splitToken) < 2{
+			w.WriteHeader(http.StatusForbidden)
+			_, _ = w.Write([]byte("invalid auth"))
+			return
+		}
 		reqToken = splitToken[1]
 
 		if err := ValidateToken(reqToken); err == nil {

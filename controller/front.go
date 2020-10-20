@@ -8,7 +8,7 @@ import (
 
 func RegisterControllers(){
 	rh := handlers.NewRestrictedHandler()
-	ph := handlers.NewPublicHandler()
+	ph := handlers.NewGenerateTokenHandler()
 	http.Handle("/secret-area",auth.Middleware(rh))
 	http.Handle("/new-token",ph)
 }
