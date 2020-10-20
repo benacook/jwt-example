@@ -1,5 +1,5 @@
 {
   "secret":{
-    "path": "./test/test-key"
+    "path": "/test/test-key"
   }
 }

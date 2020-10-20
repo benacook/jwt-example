@@ -8,6 +8,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -24,7 +26,15 @@ var (
 
 func init() {
 	var err error
-	path, err := ioutil.ReadFile("./config.json")
+	_, b, _, _ := runtime.Caller(0)
+	basePath := filepath.Dir(b)
+	splitStr := strings.SplitAfter(basePath, "jwt-example")
+	if len(splitStr) < 1{
+		log.Fatal("failed to get bas path")
+	}
+	basePath = splitStr[0]
+	configPath := splitStr[0] + "/config.json"
+	path, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -32,7 +42,7 @@ func init() {
 	config := Config{}
 	_ = json.Unmarshal(path, &config)
 
-	secret, err = ioutil.ReadFile(config.Secret.Path)
+	secret, err = ioutil.ReadFile(basePath + config.Secret.Path)
 	if err != nil {
 		log.Fatal(err)
 	}
