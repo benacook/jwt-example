@@ -6,6 +6,10 @@ import (
 	"net/http"
 )
 
+//======================================================================================
+
+//exaple of using the middleware to resrtict access to a handler function
+
 func RegisterControllers(){
 	rh := handlers.NewRestrictedHandler()
 	ph := handlers.NewGenerateTokenHandler()
